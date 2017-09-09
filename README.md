@@ -1,4 +1,4 @@
-# nanakusa_OrigDownload
+# 七草ダウンローダー
 
 ### 実行の仕方
 + このページから「clone or download」を押す

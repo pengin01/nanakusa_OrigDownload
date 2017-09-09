@@ -1,5 +1,3 @@
-var cnt = 1;
-
 
 $(function() {
   // 初期表示
@@ -56,6 +54,7 @@ function tab_view() {
           }
           url = url + extend;
 
+          // htmlタグを作成
           var tLst = $("<div class='tgt_item form-group'>" +
             "<label class='tab_title' for='name'>" + title + "</label>" +
             "<input type='text' class='tab_url form-control' value=" + url + "></div>");
@@ -63,7 +62,6 @@ function tab_view() {
           // リストに追加
           $('#tab_list').append(tLst);
         }
-
         /// $('#window_list').append($('<li></li>'));
       });
     }
@@ -84,7 +82,6 @@ function tab_close() {
 
         // タブ一覧
         for (var j = 0; j < tabs.length; j++) {
-
           // 自分は除外
           if (tabs[j].title == 'Tab Viewer') {
             continue;
@@ -103,7 +100,13 @@ function all_download() {
     var filename = $(this).find('.tab_title').text();
     var url = $(this).find('.tab_url').val();
 
-    if (url == null || url == "") {
+    if (url == null || filename == null || url.length <= 5) {
+      // 次のループ（eachの場合はcontinueは使えない）
+      return true;
+    }
+    // 末尾が「:orig」は除外
+    if (":orig" != url.slice(-5)) {
+      // 次のループ（eachの場合はcontinueは使えない）
       return true;
     }
     // download本題
@@ -114,12 +117,6 @@ function all_download() {
 // download本体
 function core_download(url, filename) {
 
-  if (url == null || filename == null || url.length <= 5) {
-    return false;
-  }
-  if (":orig" != url.slice(-5)) {
-    return false;
-  }
   // XMLHttpRequestオブジェクトを作成する
   var xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);

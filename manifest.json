@@ -17,7 +17,7 @@
     ],
     "persistent": false
   },
-  "permissions":[
+  "permissions": [
     "tabs"
   ]
 }
